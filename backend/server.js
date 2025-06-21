@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import taskRoute from './features/tasks/task.routes.js';
 import connectDB from './config/db.config.js';
+import columnRoute from './features/columns/column.routes.js';
 dotenv.config();
 
 const app = express();
@@ -15,6 +16,7 @@ app.use((req, res, next)=>{
 
 //Routes
 app.use('/api/task', taskRoute);
+app.use('/api/column', columnRoute);
 
 //Connect with database
 connectDB()
