@@ -14,8 +14,8 @@ const TaskCard = ({ taskTitle, priority, dueDate }: TaskCardProps) => {
     };
 
     return (
-        <div className="border border-gray-300 rounded-lg p-4 m-2 bg-gray-50" style={{boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.08)'}}> 
-            <div className="text-2xl font-semibold text-gray-800">
+        <div className="border border-gray-300 rounded-lg p-4 m-2 bg-gray-50" style={{ boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.08)' }}>
+            <div className="text-2xl font-medium text-gray-800">
                 {taskTitle}
             </div>
 
