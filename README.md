@@ -41,3 +41,6 @@ then start the frontend development server:
 ```bash
 npm run dev
 ```
+
+### Project Demo
+![Alt Text](demo.gif)
