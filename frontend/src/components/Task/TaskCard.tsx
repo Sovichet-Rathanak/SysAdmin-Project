@@ -28,7 +28,7 @@ const TaskCard = ({ task, onEdit, onDelete, onDragStart }: TaskCardProps) => {
             onEdit(task._id, {
                 taskTitle: editData.taskTitle.trim(),
                 priority: editData.priority,
-                dueDate: editData.dueDate || undefined,
+                dueDate: editData.dueDate.trim() === '' ? undefined : editData.dueDate,
             });
             setIsEditing(false);
         }
@@ -52,14 +52,12 @@ const TaskCard = ({ task, onEdit, onDelete, onDragStart }: TaskCardProps) => {
                         value={editData.taskTitle}
                         onChange={(e) => setEditData({ ...editData, taskTitle: e.target.value })}
                         className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                        placeholder="Task title"
-                    />
+                        placeholder="Task title" />
 
                     <select
                         value={editData.priority}
                         onChange={(e) => setEditData({ ...editData, priority: e.target.value as 'low' | 'medium' | 'high' })}
-                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                    >
+                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm">
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
@@ -68,10 +66,9 @@ const TaskCard = ({ task, onEdit, onDelete, onDragStart }: TaskCardProps) => {
                     <input
                         type="date"
                         value={editData.dueDate}
-                        min={new Date().toISOString().split('T')[0]} 
+                        min={new Date().toISOString().split('T')[0]}
                         onChange={(e) => setEditData({ ...editData, dueDate: e.target.value })}
-                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                    />
+                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm" />
 
                     <div className="flex gap-2">
                         <button

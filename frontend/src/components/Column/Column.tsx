@@ -3,7 +3,6 @@ import TaskCard from '../Task/TaskCard';
 import React, { useEffect, useState } from 'react';
 import TaskModal from '../Task/TaskModal';
 
-
 type ColumnProps = {
     columnId: string;
     columnTitle: string;
@@ -20,9 +19,11 @@ type ColumnProps = {
     onDragOver: (event: React.DragEvent) => void;
     onDrop: (event: React.DragEvent, columnId: string) => void;
     onDragStart: (event: React.DragEvent, taskId: string) => void;
+    isMobile?: boolean;
 };
 
-const Column = ({ columnTitle,
+const Column = ({
+    columnTitle,
     columnId,
     tasks = [],
     onUpdate,
@@ -32,7 +33,9 @@ const Column = ({ columnTitle,
     onDeleteTask,
     onDragOver,
     onDrop,
-    onDragStart }: ColumnProps) => {
+    onDragStart,
+    isMobile = false
+}: ColumnProps) => {
     const [editing, setEditing] = useState(false);
     const [titleInput, setTitleInput] = useState(columnTitle);
     const [showTaskModal, setShowTaskModal] = useState(false);
@@ -67,23 +70,27 @@ const Column = ({ columnTitle,
     const handleDragLeave = (event: React.DragEvent) => {
         event.preventDefault();
         setIsDragOver(false);
-    }
+    };
 
     const handleDrop = (event: React.DragEvent) => {
         event.preventDefault();
         setIsDragOver(false);
         onDrop(event, columnId);
-    }
+    };
 
     return (
-        <div className={`min-w-120 bg-gray-50 p-4 rounded-lg shadow-md transition-colors ${isDragOver ? 'bg-blue-50 border-2 border-blue-300' : ''}`}
+        <div
+            className={`${isMobile ? 'w-full' : 'w-72 sm:w-80 lg:w-96 flex-shrink-0'} bg-gray-50 p-4 rounded-lg shadow-md transition-colors ${isDragOver ? 'bg-blue-50 border-2 border-blue-300' : ''}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}>
             <div className="flex items-center justify-between gap-2 mb-4">
                 {editing ? (
                     <>
-                        <input className="border rounded px-2 py-1 flex-1" value={titleInput} onChange={(e) => setTitleInput(e.target.value)}/>
+                        <input
+                            className="border rounded px-2 py-1 flex-1"
+                            value={titleInput}
+                            onChange={(e) => setTitleInput(e.target.value)}/>
                         <button className="text-sm bg-green-500 text-white px-2 py-1 rounded" onClick={handleUpdate}>
                             Save
                         </button>
@@ -126,7 +133,8 @@ const Column = ({ columnTitle,
             <TaskModal
                 show={showTaskModal}
                 onClose={() => setShowTaskModal(false)}
-                onSubmit={handleCreateTask}/>
+                onSubmit={handleCreateTask}
+            />
         </div>
     );
 };
