@@ -2,9 +2,10 @@ import axios from "axios";
 import type { Task } from "../type";
 
 // const PORT = import.meta.env.VITE_PORT;
+// const API_HOST = import.meta.env.API_HOST;
 
 const API = axios.create({
-    baseURL: `https://f903-203-189-152-116.ngrok-free.app/api`
+    baseURL: `/api`
 })
 
 //Create
